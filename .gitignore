@@ -1,0 +1,9 @@
+*.txt
+*.csv
+*.zip
+*.raw
+Clickstream/
+tmp/
+csbufferanalizer
+sqlpusher
+test/tmp
