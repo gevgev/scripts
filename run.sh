@@ -24,10 +24,10 @@ for filename in "$zipfolder"/*.zip; do
 	echo "unzipping $filename"
 	unzip "$filename" -d "$tmpfolder"
 
-	echo "starting csbufferanalizer"
+	echo "running csbufferanalizer"
 	./csbufferanalizer -L -d "$tmpfolder"
 
-	echo "starting sqlpusher"
+	echo "running sqlpusher"
 	./sqlpusher -U="$un" -P="$psw". -S="$db" -d=Clickstream -I=*.csv m=900
 
 	echo "clean up for $filename"
