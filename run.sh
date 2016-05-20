@@ -31,6 +31,6 @@ for filename in "$zipfolder"/*.zip; do
 	./sqlpusher -U="$un" -P="$psw". -S="$db" -d=Clickstream -I=*.csv m=900
 
 	echo "clean up for $filename"
-	echo `rm *.csv`
-	echo `rm "$tmpfolder"/*.raw`
+	echo `rm -f *.csv`
+	echo `rm -f "$tmpfolder"/*.raw`
 done
