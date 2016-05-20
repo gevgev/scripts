@@ -29,12 +29,12 @@ for filename in "$zipfolder"/*.zip; do
 	rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
 
 	echo "running csbufferanalizer"
-	./csbufferanalizer -L -d "$tmpfolder"
+	./csbufferanalizer -L -M 50000 -d "$tmpfolder"
 	rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
 
 	echo "running sqlpusher for each csv file"
 	for csvfile in "$dir"/*.csv; do
-		./sqlpusher -U="$un" -P="$psw". -S="$db" -d=Clickstream -I="$csvfile" m=900
+		./sqlpusher -U="$un" -P="$psw" -S="$db" -d=Clickstream -I="$csvfile" m=900
 		rc=$?; if [[ $rc != 0 ]]; then 
 			echo "clean up for $filename"
 			echo `rm -f *.csv`
