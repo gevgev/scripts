@@ -20,6 +20,8 @@ db=$3
 un=$4
 psw=$5
 
+dir=$(pwd)
+
 for filename in "$zipfolder"/*.zip; do
 	echo "unzipping $filename"
 	unzip "$filename" -d "$tmpfolder"
@@ -27,8 +29,10 @@ for filename in "$zipfolder"/*.zip; do
 	echo "running csbufferanalizer"
 	./csbufferanalizer -L -d "$tmpfolder"
 
-	echo "running sqlpusher"
-	./sqlpusher -U="$un" -P="$psw". -S="$db" -d=Clickstream -I=*.csv m=900
+	echo "running sqlpusher for each csv file"
+	for csvfile in "$dir"/*.csv; do
+		./sqlpusher -U="$un" -P="$psw". -S="$db" -d=Clickstream -I="$csvfile" m=900
+	done
 
 	echo "clean up for $filename"
 	echo `rm -f *.csv`
