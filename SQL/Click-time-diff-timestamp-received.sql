@@ -1,28 +1,11 @@
 DECLARE @START datetime
 DECLARE @END datetime
 
-SET @START = '2016-04-01'
-SET @END = '2016-05-21'
+SET @START = '2016-05-13'
+SET @END = '2016-05-22'
 
-SELECT  TOP 1000 --[Id]
-	  [deviceId],
-      AVG( CAST(( DATEDIFF(second, [timestamp], [received])) as BIGINT)) as [Diff (seconds)],
-      AVG( CAST(( DATEDIFF(second, [timestamp], [received])) as BIGINT)) / 3600  as [hours],
-      AVG( CAST(( DATEDIFF(second, [timestamp], [received])) as BIGINT)) / 60 % 60 as [min],
-      AVG( CAST(( DATEDIFF(second, [timestamp], [received])) as BIGINT)) % 60 as [sec]
-      --,[timestamp]
-      --,[received]
-      --,[deviceId]
-      --,[eventCode]
-      --,[msoName]
-FROM [Clickstream].[dbo].[clickstreamEventsLog] cl
-WHERE 
-	(cl.[timestamp] > @START) AND (cl.[timestamp] < @END) AND
-	(cl.[received] > @START) AND (cl.[received] < @END)
-GROUP BY [deviceId]
-ORDER BY [deviceId]
-
-SELECT  TOP 1000 --[Id]
+-- FOR all STB's with AVG, MIN, and MAX
+SELECT  --TOP 1000 --[Id]
 	  [deviceId],
       AVG( CAST(( DATEDIFF(second, [timestamp], [received])) as BIGINT)) as [AVG Diff (seconds)],
       AVG( CAST(( DATEDIFF(second, [timestamp], [received])) as BIGINT)) / 3600  as [hours],
@@ -45,14 +28,14 @@ SELECT  TOP 1000 --[Id]
       --,[msoName]
 FROM [Clickstream].[dbo].[clickstreamEventsLog] cl
 WHERE 
-	-- deviceId = '0000000FCF79' AND 
+ 	 msoName = 'Click-Tacoma' AND
 	(cl.[timestamp] > @START) AND (cl.[timestamp] < @END) AND
 	(cl.[received] > @START) AND (cl.[received] < @END)
 
 GROUP BY [deviceId]
 ORDER BY [deviceId]
 
-
+-- for all devices ABSOLUTE AVG, MIN, MAX only
 SELECT  AVG(CAST( ([Diff]) as BIGINT)) AS [Total Average],
 
 		AVG(CAST( ([Diff]) as BIGINT)) / 3600 AS [TA hours],
@@ -72,8 +55,8 @@ SELECT  AVG(CAST( ([Diff]) as BIGINT)) AS [Total Average],
 		MAX(CAST( ([Diff]) AS BIGINT)) % 60 AS [TMax]
 
 FROM 
-(  SELECT  TOP 1000 --[Id]
-		  [deviceId],
+(  SELECT  --TOP 1000 --[Id]
+		  --[deviceId],
 		  AVG( CAST(( DATEDIFF(second, [timestamp], [received])) as BIGINT)) as [Diff],
 		  AVG( CAST(( DATEDIFF(second, [timestamp], [received])) as BIGINT)) / 3600  as [hours],
 		  AVG( CAST(( DATEDIFF(second, [timestamp], [received])) as BIGINT)) / 60 % 60 as [min],
@@ -85,10 +68,11 @@ FROM
 		  --,[msoName]
 	FROM [Clickstream].[dbo].[clickstreamEventsLog] cl
 	WHERE 
+	 	 msoName = 'Click-Tacoma' AND
 		(cl.[timestamp] > @START) AND (cl.[timestamp] < @END) AND
 		(cl.[received] > @START) AND (cl.[received] < @END)
-	GROUP BY [deviceId]
-	ORDER BY [deviceId]
+	--GROUP BY [deviceId]
+	--ORDER BY [deviceId]
 )ClickData
 GO
 
@@ -105,4 +89,27 @@ SELECT  TOP 1000 --[Id]
 FROM [Clickstream].[dbo].[clickstreamEventsLog]
 ORDER BY [deviceId]
 
+*/
+
+
+/*
+-- for all devices DIFFS  only
+SELECT  --TOP 1000 --[Id]
+	  [deviceId],
+      AVG( CAST(( DATEDIFF(second, [timestamp], [received])) as BIGINT)) as [Diff (seconds)],
+      AVG( CAST(( DATEDIFF(second, [timestamp], [received])) as BIGINT)) / 3600  as [hours],
+      AVG( CAST(( DATEDIFF(second, [timestamp], [received])) as BIGINT)) / 60 % 60 as [min],
+      AVG( CAST(( DATEDIFF(second, [timestamp], [received])) as BIGINT)) % 60 as [sec]
+      --,[timestamp]
+      --,[received]
+      --,[deviceId]
+      --,[eventCode]
+      --,[msoName]
+FROM [Clickstream].[dbo].[clickstreamEventsLog] cl
+WHERE
+	msoName = 'Click-Tacoma' AND
+	(cl.[timestamp] > @START) AND (cl.[timestamp] < @END) AND
+	(cl.[received] > @START) AND (cl.[received] < @END)
+GROUP BY [deviceId]
+ORDER BY [deviceId]
 */
