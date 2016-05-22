@@ -56,7 +56,7 @@ SELECT  AVG(CAST( ([Diff]) as BIGINT)) AS [Total Average],
 
 FROM 
 (  SELECT  --TOP 1000 --[Id]
-		  --[deviceId],
+		  [deviceId],
 		  AVG( CAST(( DATEDIFF(second, [timestamp], [received])) as BIGINT)) as [Diff],
 		  AVG( CAST(( DATEDIFF(second, [timestamp], [received])) as BIGINT)) / 3600  as [hours],
 		  AVG( CAST(( DATEDIFF(second, [timestamp], [received])) as BIGINT)) / 60 % 60 as [min],
@@ -71,7 +71,7 @@ FROM
 	 	 msoName = 'Click-Tacoma' AND
 		(cl.[timestamp] > @START) AND (cl.[timestamp] < @END) AND
 		(cl.[received] > @START) AND (cl.[received] < @END)
-	--GROUP BY [deviceId]
+	GROUP BY [deviceId]
 	--ORDER BY [deviceId]
 )ClickData
 GO

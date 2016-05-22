@@ -1,4 +1,4 @@
-/* SINGLE DEFECTIVE DATES DEVICE */
+/* SINGLE DEVICE */
 
 DECLARE @START datetime
 DECLARE @END datetime
@@ -7,9 +7,9 @@ SET @START = '2016-04-01'
 SET @END = '2016-05-21'
 
 SELECT *,
-	DATEDIFF(second, timestamp, received) 
+	DATEDIFF(second, timestamp, received) as [Diff]
 FROM dbo.clickstreamEventsLog
-WHERE deviceId = '0000000FCF79'
+WHERE deviceId = '0000000F7208'
 
 
 SELECT  --TOP 1000 --[Id]
