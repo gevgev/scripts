@@ -6,8 +6,7 @@ MAINTAINER Gevorg Gevorgyan <gevgev@yahoo.com>
 RUN apt-get update \
   && apt-get upgrade -y 
 
-RUN apt-get install -y wget \
-  && apt-get install -y zip unzip 
+RUN apt-get install -y zip unzip 
 
 RUN apt-get install -y \
     ssh \
@@ -22,14 +21,12 @@ RUN \
     echo 'source $HOME/aws/env/bin/activate' >> .bashrc && \
     echo 'complete -C aws_completer aws' >> .bashrc
 
-RUN export PATH=/home/aws/aws/env/bin:$PATH 
+#RUN $HOME/aws/env/bin/aws
 
-USER root
 ADD csbufferanalizer csbufferanalizer
 ADD run-ftp-s3.sh run-ftp-s3.sh
 
-ARG FTPPATH
 ARG FILE
 ARG BUCKET
 
-ENTRYPOINT ./run-ftp-s3.sh $FTPPATH $FILE $BUCKET
+ENTRYPOINT ./run-ftp-s3.sh $FILE $BUCKET

@@ -2,9 +2,9 @@
 
 set -x
 
-path=$1
-file=$2
-bucket=$3
+#path=$1
+file=$1
+bucket=$2
 
 #ftp -in ec2-52-24-138-152.us-west-2.compute.amazonaws.com << SCRIPTEND
 #user adsawsftp quickaccess123
@@ -13,9 +13,10 @@ bucket=$3
 #mget "$file"
 #SCRIPTEND
 
-wget --no-passive-ftp ftp://adsawsftp:quickaccess123@ec2-52-24-138-152.us-west-2.compute.amazonaws.com/"$1"/"$2"
+# moving this to host
+# wget --no-passive-ftp ftp://adsawsftp:quickaccess123@ec2-52-24-138-152.us-west-2.compute.amazonaws.com/"$1"/"$2"
 
-rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
+#rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
 
 echo `mkdir tmp`
 echo `unzip "$file" -d "tmp"`
@@ -29,7 +30,9 @@ rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
 echo `rm -f tmp/*`
 echo `mv *.csv tmp/`
 
-/home/ubuntu/aws/env/bin/aws s3 cp tmp/ s3://"$bucket" --recursive
+export PATH=/aws/env/bin:$PATH
 
-echo `rm -f tmp/*`
-echo `rm "$file"`
+/aws/env/bin/aws s3 cp tmp/ s3://"$bucket" --recursive
+
+#echo `rm -f tmp/*`
+#echo `rm "$file"`
