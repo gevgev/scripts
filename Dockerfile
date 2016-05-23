@@ -15,12 +15,6 @@ RUN apt-get install -y \
     python-pip \
     python-virtualenv
 
-RUN adduser --disabled-login --gecos '' aws
-
-WORKDIR /home/aws
-
-USER aws
-
 RUN \
     mkdir aws && \
     virtualenv aws/env && \
@@ -34,8 +28,8 @@ USER root
 ADD csbufferanalizer csbufferanalizer
 ADD run-ftp-s3.sh run-ftp-s3.sh
 
-ARG PATH
+ARG FTPPATH
 ARG FILE
 ARG BUCKET
 
-ENTRYPOINT ./run-ftp-s3.sh $PATH $FILE $BUCKET
+ENTRYPOINT ./run-ftp-s3.sh $FTPPATH $FILE $BUCKET
