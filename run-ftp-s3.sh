@@ -13,7 +13,7 @@ bucket=$3
 #mget "$file"
 #SCRIPTEND
 
-wget --passive-ftp ftp://adsawsftp:quickaccess123@ec2-52-24-138-152.us-west-2.compute.amazonaws.com/"$1"/"$2"
+wget --no-passive-ftp ftp://adsawsftp:quickaccess123@ec2-52-24-138-152.us-west-2.compute.amazonaws.com/"$1"/"$2"
 
 rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
 
