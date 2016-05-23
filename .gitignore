@@ -6,5 +6,5 @@ Clickstream/
 tmp/
 csbufferanalizer
 sqlpusher
-test/tmp
+test/*.*
 Archive/
