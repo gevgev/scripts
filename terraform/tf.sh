@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# set -x
+set -x
 
 if [ "$#" -lt 1 ]; then
   echo "ERROR: missing required parameters:  <instances> "
