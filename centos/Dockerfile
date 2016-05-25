@@ -20,8 +20,4 @@ RUN curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.
 ADD csbufferanalizer csbufferanalizer
 ADD run-ftp-s3.sh run-ftp-s3.sh
 
-ARG FTPPATH
-ARG FILE
-ARG BUCKET
-
-ENTRYPOINT ./run-ftp-s3.sh $FTPPATH $FILE $BUCKET
+ENTRYPOINT ./run-ftp-s3.sh

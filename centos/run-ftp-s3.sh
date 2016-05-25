@@ -2,9 +2,9 @@
 
 set -x
 
-ftppath=$1
-file=$2
-bucket=$3
+ftppath=$S3_PUSHER_FTPPATH
+file=$S3_PUSHER_FILE
+bucket=$S3_PUSHER_BUCKET
 
 readonly tmpfolder="temp-r31"
 
