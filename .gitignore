@@ -8,3 +8,4 @@ csbufferanalizer
 sqlpusher
 test/*.*
 Archive/
+terraform-ecs/
