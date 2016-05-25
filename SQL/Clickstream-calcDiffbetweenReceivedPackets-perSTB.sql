@@ -1,12 +1,13 @@
+USE Clickstream
+GO
+
 --CTE - ALL 
 With tblDifference as
 (
 Select Row_Number() OVER (Order by [deviceId], [timestamp]) as RowNumber, [deviceId], [timestamp] from 
-	( SELECT DISTINCT TOP 15000 deviceid, received as [timestamp]
+	( SELECT DISTINCT deviceid, received as [timestamp]
 	  FROM  dbo.clickstreamEventsLog
 	  WHERE msoName = 'Click-Tacoma'
-	  ORDER by deviceId, received
-	-- dbo.Packets
 	) Packets
 )
 --Actual Query

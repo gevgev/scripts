@@ -1,0 +1,6 @@
+terraform.tfvars
+terraform.tfstate
+terraform.tfstate.backup
+ssh/insecure-r31-deployer
+ssh/insecure-r31-deployer.pub
+*.docx

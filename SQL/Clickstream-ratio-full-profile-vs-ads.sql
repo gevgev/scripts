@@ -6,10 +6,9 @@ SELECT
 	(COUNT(cl.Id)) / (COUNT(DISTINCT(cl.deviceId))) as [events per devices]
 	
 FROM dbo.clickstreamEventsLog cl
---WHERE 
+WHERE 
+	timestamp > '2016-04-20' AND timestamp < '2016-05-24' 
 --	msoName = 'Mediacom-Moline' 
---	AND timestamp > '2016-04-23' AND timestamp < '2016-04-25' 
 --	msoName = 'Click-Tacoma' 
 GROUP BY cl.msoName, CAST( cl.timestamp as DATE)
---	AND timestamp < '2016-05-16' AND timestamp > '2016-05-14'
 ORDER BY cl.msoName, CAST( cl.timestamp as DATE)
