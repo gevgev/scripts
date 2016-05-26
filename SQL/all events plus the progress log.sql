@@ -28,6 +28,11 @@ FROM dbo.clickstreamEventsLog (NOLOCK)
 -- 2016-05-23 21:44:42.513	  727,990,005 3 hours (3:05PM) = 60 mln, 20 mln per hour
 -- 2016-05-24 04:06:09.787	  850,608,047 6 hours (9:35pm) = 123 mln, less than 20 mln
 -- 2016-05-25 01:24:24.600	1,256,358,893 21+1=22.5 hours. ~ 408 mln, 18 mln per hour
+-- 2016-05-25 19:13:51.203	1,314,090,914 <- final
+--												1,314,090,914
+-- click 5/23 duplicates deleted for all 5/23 =    22,963,110 row(s) affected)
+
+
 -- 114,836,846
 
 -- 9:44pm 5/23
